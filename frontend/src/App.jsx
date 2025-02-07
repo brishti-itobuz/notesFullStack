@@ -1,6 +1,7 @@
 import React from 'react';
 import HomePage from './pages/Home.jsx';
 import SignupForm from './pages/Signup.jsx';
+import VerifyEmail from './pages/Verify.jsx'
 
 function App() {
 
@@ -11,7 +12,9 @@ function App() {
          {/* <HomePage></HomePage> 
           */}
 
-          <SignupForm></SignupForm>
+          {/* <SignupForm></SignupForm> */}
+
+          <VerifyEmail></VerifyEmail>
         
        </>
     
