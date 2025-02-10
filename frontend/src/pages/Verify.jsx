@@ -21,7 +21,6 @@ const VerifyEmail = () => {
   
     return (
       <div>
-        {/* <h2>Email Verification</h2> */}
         <p className="flex items-center justify-center text-green-600">{message}</p>
       </div>
     )};

@@ -18,7 +18,7 @@ export const addUser = async (req, res) => {
         data: identical,
       });
     } else {
-      const token = jwt.sign({}, process.env.secretKey, { expiresIn: "30m" });
+      const token = jwt.sign({}, process.env.secretKey, { expiresIn: "2d" });
       await mailSender(token, email);
       const user_name = await User.create({ username, email, password, token });
       const salt = await bcrypt.genSalt(10);
@@ -77,12 +77,12 @@ export const loginUser = async (req, res) => {
     }
     
     const accessToken = jwt.sign({ id }, process.env.secretKey, {
-      expiresIn: "30m",
+      expiresIn: "2d",
     });
     const refreshToken = jwt.sign(
       { id: user_name._id },
       process.env.secretKey,
-      { expiresIn: "7d" }
+      { expiresIn: "15d" }
     );
 
     
