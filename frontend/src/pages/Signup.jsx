@@ -3,6 +3,13 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar.jsx";
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
+
+
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -29,16 +36,21 @@ const userSchema = yup.object({
 
 
 const SignupForm = () => {
+ 
+  const navigate = useNavigate();
 const {register,handleSubmit, formState: { errors }} =useForm({resolver: yupResolver(userSchema)})
 
 
   const onSubmit = async (data) => {
-    
-    
 
     try {
       const response = await axios.post('http://localhost:3001/user/addUser', data);
       console.log('User added successfully:',response.data);
+      toast.success("Success Notification !", {
+        position: "top-right"
+      }); 
+
+
     } catch (error) {
       console.log('Error adding User:', error);
       
@@ -50,9 +62,13 @@ const {register,handleSubmit, formState: { errors }} =useForm({resolver: yupReso
 
 
  return (
+   <div>
+  <NavBar redirect={{path:"SignIn"}}></NavBar>
+  
       
 <div className="h-screen flex items-center justify-center">
-  
+
+
   <form onSubmit={handleSubmit(onSubmit)} className="bg-yellow-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
   <h4 className="text-2xl font-bold mb-6 text-center">Sign Up</h4>
     <div className="mb-4">
@@ -79,13 +95,15 @@ const {register,handleSubmit, formState: { errors }} =useForm({resolver: yupReso
     </div>
 
     
- <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+ <button onClick={() => {navigate("/SignIn"); onSubmit;}} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
         Sign Up
       </button>
+      <ToastContainer />
     
     
   </form>
   
+</div>
 </div>
 ) }
 

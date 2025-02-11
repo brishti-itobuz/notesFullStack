@@ -1,10 +1,13 @@
 import {React, useState} from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../components/NavBar.jsx";
 
 
 
 const SignInForm = () => {
+  const navigate = useNavigate();
   
     const [message, setMessage] = useState('');
     const {
@@ -32,6 +35,10 @@ const SignInForm = () => {
     }; 
     
     return (
+<div> 
+    <NavBar redirect={{path:"Logout"}}></NavBar>
+
+      
         <div className="h-screen flex items-center justify-center">
   
   <form onSubmit={handleSubmit(onSubmit)} className="bg-yellow-100 shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -61,6 +68,7 @@ const SignInForm = () => {
     
   </form>
   
+</div>
 </div>
         
     );
